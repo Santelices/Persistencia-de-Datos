@@ -30,7 +30,7 @@ class Proveedor(ModelBaseAudited):
 class Compra(ModelBaseAudited):
     numero = models.CharField(max_length=20, blank=True, null=True)
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, blank=True, null=True)
-    fecha = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    fecha = models.DateTimeField( blank=True, null=True)
     impuesto = models.DecimalField(max_digits=8, decimal_places=2)
     descuento = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     subtotal = models.DecimalField(max_digits=8, decimal_places=2, default=0)
@@ -50,7 +50,7 @@ class Cuadro(ModelBaseAudited):
     titulo = models.CharField(max_length=100, blank=True, null=True)
     descripcion = models.CharField(max_length=100, blank=True, null=True)
     autor = models.CharField(max_length=100, blank=True, null=True)
-    año = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    año = models.DateTimeField( blank=True, null=True)
 
     class Meta:
         verbose_name = 'Cuadro'
@@ -75,8 +75,8 @@ class Material(ModelBaseAudited):
 
 class Inventario(ModelBaseAudited):
     codigo = models.CharField(max_length=20, blank=True, null=True)
-    fecha_entrada =  models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    fecha_salida =  models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    fecha_entrada =  models.DateTimeField( blank=True, null=True)
+    fecha_salida =  models.DateTimeField( blank=True, null=True)
     compra = models.ForeignKey(Compra, on_delete=models.CASCADE, blank=True, null=True)
     material = models.ForeignKey(Material, on_delete=models.CASCADE, blank=True, null=True)
 

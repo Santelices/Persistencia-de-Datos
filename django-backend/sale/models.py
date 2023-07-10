@@ -16,13 +16,13 @@ class Cliente(ModelBaseAudited):
         ordering = ['-nombre']
 
     def __str__(self):
-        return self.nombre
+        return self.codigo
     
 class Pago(ModelBase):
     codigo = models.CharField(max_length=100,blank=True,null=True)
     nombre = models.CharField(max_length=100, blank=True, null=True)
     monto = models.DecimalField(max_digits=8, decimal_places=2)
-    fecha = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    fecha = models.DateTimeField( blank=True, null=True,editable=True,)
 
     class Meta :
         ordering = ['-nombre']
@@ -34,7 +34,7 @@ class Venta(ModelBaseAudited):
     numero = models.CharField(max_length=20, blank=True, null=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, blank=True, null=True)
     pago = models.ForeignKey(Pago, on_delete=models.CASCADE, blank=True, null=True)
-    fecha = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    fecha = models.DateTimeField( blank=True, null=True,editable=True)
     descuento = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     subtotal = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
@@ -63,4 +63,4 @@ class DetalleVenta(ModelBaseAudited):
 
 
     def __str__(self):
-       return self.producto
+       return self.numero
