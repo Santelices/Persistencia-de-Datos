@@ -1,0 +1,101 @@
+@startuml "Venta de Cuadros de Pinturas" {
+
+    entity "Cliente" as Cliente {
+        +id_cliente : integer
+        --
+        nombre : string
+        direccion : string
+        telefono : string
+        email: string
+    }
+
+    entity "Pago" as Pago {
+        +id_pago : integer
+        --
+        nombre: string
+        monto : decimal
+        fecha : date
+    }
+
+    entity "Venta" as Venta {
+        +id_venta : integer
+        --
+        fecha: datetime
+        subtotal: decimal
+        descuento: decimal
+        total: decimal
+    }
+
+    entity "DetalleVenta" as DetalleVenta {
+        +id_detalle : integer
+        --
+        cantidad : integer
+        precio: decimal
+        subtotal: decimal
+        total: decimal
+    }
+
+    entity "Categoría" as Categoria {
+        +id_categoria : integer
+        --
+        nombre : string
+    
+    }
+    entity "Compra" as Compra {
+        +id_compra : integer
+        --
+        fecha : datetime
+        impuesto: decimal
+        descuento: decimal
+        subtotal: decimal
+        total: decimal
+    }
+
+    entity "Cuadro" as Cuadro {
+        +id_cuadro : integer
+        --
+        titulo : string
+        descripcion : string
+        autor : string
+        año : integer
+    }
+
+    entity "Material" as Material {
+        +id_material : integer
+        --
+        descripcion: string
+        estado : bit  
+    }
+
+    entity "Proveedor" as Proveedor {
+        +id_proveedor : integer
+        --
+        nombre : string
+        direccion : string
+        telefono : string
+        email: string
+    }
+
+    entity "Inventario" as Inventario {
+        +id_inventario : integer
+        --
+        fecha_entrada : date
+        fecha_salida : date
+    }
+
+
+
+    Cliente ||--o{ Venta
+    Pago ||--|{ Venta
+
+    Venta ||--|{ DetalleVenta
+    Cuadro ||--|{ DetalleVenta
+    
+    Proveedor ||--o{ Compra
+    Compra ||--|{ Material
+
+    Inventario ||--|{ Cuadro
+    Inventario ||--|{ Material
+    Categoria ||--|{ Cuadro
+
+@enduml
