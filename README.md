@@ -45,3 +45,13 @@ Dropdb -p [puerto] -h localhost -U [usuario] -W [nombre_de_la_base_de_datos]
 # Ver Bases de datos
 psql -p [puerto] -h localhost -U [usuario]
 postgres=# \l
+
+
+## Subir cambios
+git init
+
+git add .
+
+git commit -m "nombre del commit"
+
+git push 
