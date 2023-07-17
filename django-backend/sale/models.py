@@ -16,7 +16,7 @@ class Cliente(ModelBaseAudited):
         ordering = ['-nombre']
 
     def __str__(self):
-        return self.codigo
+        return self.nombre
     
 class Pago(ModelBase):
     codigo = models.CharField(max_length=100,blank=True,null=True)

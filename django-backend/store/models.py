@@ -50,7 +50,7 @@ class Cuadro(ModelBaseAudited):
     titulo = models.CharField(max_length=100, blank=True, null=True)
     descripcion = models.CharField(max_length=100, blank=True, null=True)
     autor = models.CharField(max_length=100, blank=True, null=True)
-    año = models.DateTimeField( blank=True, null=True)
+    año = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Cuadro'
@@ -65,6 +65,7 @@ class Material(ModelBaseAudited):
     nombre = models.CharField(max_length=100,blank=True,null=True)
     descripcion = models.TextField()
     estado = models.BooleanField()
+    imagen = models.ImageField(upload_to='Cuadros', null=True)
 
     class Meta:
         verbose_name = 'Material'
