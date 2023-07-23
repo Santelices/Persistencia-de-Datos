@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
+from segurity.views import HomeView
 
 urlpatterns = [
+    path('', HomeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('',include('store.urls')) , 
-    path('registrarCuadro/',include('store.urls'))
+    path('segurity/', include('segurity.urls')),
 ]
+
