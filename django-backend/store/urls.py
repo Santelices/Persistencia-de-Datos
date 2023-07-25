@@ -1,7 +1,6 @@
 from django.urls import path
-from . import views
+from .views import CuadroListView
 
 urlpatterns = [
-    path('' , views.home),
-    path('',views.registarCuadro)
+    path('productos', CuadroListView.as_view(), name='productos'),
 ]

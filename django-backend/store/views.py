@@ -1,20 +1,28 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 from .models import Cuadro
-from .models import Categoria
+from django.db.models import Q
 # Create your views here.
 
-def home(request):
-    CuadrosListado = Cuadro.objects.all()
-    CategoriaListado = Categoria.objects.all()
-    return render(request,'store/gestioncuadros.html',{'cuadros': CuadrosListado , 'categorias' : CategoriaListado})
+class CuadroListView(LoginRequiredMixin, ListView):
+    login_url = '/segurity/login/'
+    redirect_field_name = 'redirect_to'
+    template_name = 'store/productos.html'
+    context_object_name = 'productos'
+    paginate_by = 10
 
-def registarCuadro(request):
-    codigo = request.Post['txtcodigo']
-    categoria = request.Post['txtCategoria']
-    titulo = request.Post['txttitulo']
-    descripcion = request.Post['txtdescripcion']
-    autor = request.Post['txtautor']
-    año = request.Post['numAño']
-
-    cuadro = Cuadro.objects.create(codigo = codigo , categoria = categoria , titulo = titulo ,descripcion = descripcion , autor = autor, año = año )
-    return redirect('/')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('search', '')
+        return context
+    
+    def get_queryset(self, **kwargs):
+        search = self.request.GET.get('search', '')
+        return Cuadro.objects.filter(
+            Q(deleted=False),
+            Q(codigo__icontains=search) |
+            Q(titulo__icontains=search) |
+            Q(autor__icontains=search) |
+            Q(año__icontains=search)
+        )
