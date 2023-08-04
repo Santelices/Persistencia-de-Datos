@@ -29,7 +29,7 @@
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-        <h3>Listado de Productos</h3>
+        <h3>Listado de Cuadros</h3>
         <div class="row mt-2">
             <div class="col-md-2">
                 <a class="btn btn-success">
@@ -59,11 +59,12 @@
                 <th scope="col">Descripcion</th>
                 <th scope="col">Autor</th>
                 <th scope="col">Año</th>
+                <th scope="col">Imagen</th>
                 <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for p in productos %}
+                {% for p in cuadros %}
                     <tr>
                         <td>{{ p.codigo }}</td>
                         <td>{{ p.titulo }}</td>
@@ -71,6 +72,7 @@
                         <td>{{ p.descripcion }}</td>
                         <td>{{ p.autor }}</td>
                         <td>{{ p.año }}</td>
+                        <td>{{ p.imagen }}</td>
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-small btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

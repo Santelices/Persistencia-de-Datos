@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django.utils.html import format_html
 # Register your models here.
 
 
@@ -63,8 +64,8 @@ class CompraAdmin(admin.ModelAdmin):
                 ('impuesto','descuento'),
                 ('subtotal','total')
             ]
-            
-        
+
+
         })
         ,
     ]
@@ -94,10 +95,10 @@ class CuadroAdmin(admin.ModelAdmin):
                 ('codigo',),
                 ('categoria','titulo'),
                 ('descripcion','autor'),
-                ('año')
+                ('año', 'imagen')
             ]
-            
-        
+
+
         })
         ,
     ]
@@ -109,9 +110,18 @@ class CuadroAdmin(admin.ModelAdmin):
         'descripcion',
         'autor',
         'año',
-
-
+        'imagen_preview'
     )
+
+    def imagen_preview(self, obj):
+        if obj.imagen:
+            return format_html('<img src="{}" style="max-height: 100px; max-width: 100px;" />', obj.imagen.url)
+        else:
+            return 'No Image'
+
+    imagen_preview.allow_tags = True
+    imagen_preview.short_description = 'Imagen'
+
     list_per_page = 20
     search_fields = ('codigo','categoria','año','autor')
     list_filter = (
@@ -127,8 +137,8 @@ class MaterialAdmin(admin.ModelAdmin):
                 ('compra','nombre'),
                 ('descripcion','estado'),
             ]
-            
-        
+
+
         })
         ,
     ]
@@ -157,8 +167,8 @@ class InventarioAdmin(admin.ModelAdmin):
                 ('fecha_entrada','fecha_salida'),
                 ('compra','material'),
             ]
-            
-        
+
+
         })
         ,
     ]
@@ -178,7 +188,3 @@ class InventarioAdmin(admin.ModelAdmin):
         'codigo', 'compra', 'material'
     )
 admin.site.register(Inventario,InventarioAdmin)
-
-
-
-
