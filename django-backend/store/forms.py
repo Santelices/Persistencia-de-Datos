@@ -13,7 +13,7 @@ class CuadroForm(forms.ModelForm):
             'descripcion': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'autor': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'año': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'imagen': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'imagen': forms.FileInput(attrs={'class': 'form-control-file'}),
 
 
 
